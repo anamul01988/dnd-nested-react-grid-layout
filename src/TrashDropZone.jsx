@@ -53,17 +53,24 @@ const TrashDropZone = ({ data, onDrop }) => {
       >
         TRASH
       </div>
+      <div style={{ textAlign: "center" }}>
+        <textarea
+          style={{
+            color: "#000",
+            height: "700px",
+            width: "600px",
+            border: "2px solid #777",
+            marginTop: "20px",
+          }}
+          name="postContent"
+          // defaultValue={JSON.parse(objTree)}
+          value={objTree}
+          // rows={100}
+          // cols={10}
+        />
+      </div>
 
-     <div style={{textAlign:"center"}}>
-     <textarea
-        style={{ color: "#000", height: "700px", width:"600px", border:"2px solid #777" ,marginTop:"20px"}}
-        name="postContent"
-        // defaultValue={JSON.parse(objTree)}
-        value={objTree}
-        // rows={100}
-        // cols={10}
-      />
-     </div>
+ 
     </>
   );
 };
