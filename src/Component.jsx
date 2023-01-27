@@ -22,7 +22,7 @@ const Component = ({ data, components, path }) => {
   drag(ref);
 
   const component = components[data.id];
-
+console.log("component",component);
   return (
     <div
       ref={ref}

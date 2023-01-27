@@ -7,7 +7,7 @@ import Component from "./Component";
 const style = {};
 const Column = ({ data, components, handleDrop, path }) => {
   const ref = useRef(null);
-  console.log("data",data);
+  // console.log("data",data);
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: COLUMN,

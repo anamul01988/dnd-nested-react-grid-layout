@@ -2,6 +2,8 @@ import shortid from "shortid";
 
 export const SIDEBAR_ITEM = "sidebarItem";
 export const ROW = "row";
+export const NEW_ROW = "new_row";
+export const NEW_COMPONENT = "new_component";
 export const COLUMN = "column";
 export const COMPONENT = "component";
 

@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { ROW, COLUMN, COMPONENT } from "./constants";
+import { ROW, COLUMN, COMPONENT,NEW_ROW } from "./constants";
 
 // a little function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
@@ -195,12 +195,15 @@ export const handleMoveSidebarComponentIntoParent = (
   item
 ) => {
   let newLayoutStructure;
+  console.log("item in helper",item);
   switch (splitDropZonePath.length) {
     case 1: {
       newLayoutStructure = {
         type: ROW,
+        // type: NEW_ROW,
         id: shortid.generate(),
-        children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]
+        // children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]
+        children: []
       };
       break;
     }

@@ -6,7 +6,7 @@ import { COMPONENT, ROW, COLUMN } from "./constants";
 const ACCEPTS = [ROW, COLUMN, COMPONENT];
 
 const TrashDropZone = ({ data, onDrop }) => {
-  const [objTree, setObjectTree] = useState(null);
+  const [objTree, setObjectTree] = useState({});
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ACCEPTS,
     drop: (item, monitor) => {
@@ -18,7 +18,7 @@ const TrashDropZone = ({ data, onDrop }) => {
       const splitItemPath = itemPath.split("-");
       const itemPathRowIndex = splitItemPath[0];
       const itemRowChildrenLength =
-        layout[itemPathRowIndex] && layout[itemPathRowIndex].children.length;
+        layout[itemPathRowIndex] && layout[itemPathRowIndex].children?.length;
 
       // prevent removing a col when row has only one col
       if (
@@ -38,13 +38,13 @@ const TrashDropZone = ({ data, onDrop }) => {
   });
 
   const isActive = isOver && canDrop;
-  console.log("trash Data", data);
+  // console.log("trash Data", data);
   useEffect(() => {
     const objTree1 = JSON.stringify(data, undefined, 4);
     setObjectTree(objTree1);
   }, [data]);
   // const objTree = JSON.stringify(data, undefined, 4)
-  console.log("objTree", objTree);
+  // console.log("objTree", objTree);
   return (
     <>
       <div
@@ -63,6 +63,7 @@ const TrashDropZone = ({ data, onDrop }) => {
             marginTop: "20px",
           }}
           name="postContent"
+          readOnly
           // defaultValue={JSON.parse(objTree)}
           value={objTree}
           // rows={100}
