@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { ROW, COLUMN, COMPONENT,NEW_ROW } from "./constants";
+import { ROW, COLUMN, COMPONENT,NEW_ROW,NEW_COLUMN } from "./constants";
 
 // a little function to help us with reordering the result
 export const reorder = (list, startIndex, endIndex) => {
@@ -239,6 +239,42 @@ export const handleMoveSidebarComponentIntoParent1 = (
       newLayoutStructure = {
         // type: ROW,
         type: NEW_ROW,
+        id: shortid.generate(),
+        // children: [{ id: shortid.generate(), children: [item] }]
+        // children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]
+        children: []
+      };
+      break;
+    }
+    case 2: {
+      newLayoutStructure = {
+        type: COLUMN,
+        id: shortid.generate(),
+        children: [item]
+      };
+      break;
+    }
+    default: {
+      newLayoutStructure = item;
+    }
+  }
+
+  return addChildToChildren(layout, splitDropZonePath, newLayoutStructure);
+};
+export const handleMoveSidebarComponentIntoParent2 = (
+  layout,
+  splitDropZonePath,
+  item
+) => {
+  let newLayoutStructure;
+  console.log("for new column layout in helpers",layout);
+  // console.log("splitDropZonePath in helper",splitDropZonePath);
+  console.log("for new column item in helpers",item);
+  switch (splitDropZonePath.length) {
+    case 1: {
+      newLayoutStructure = {
+        // type: ROW,
+        type: NEW_COLUMN,
         id: shortid.generate(),
         // children: [{ id: shortid.generate(), children: [item] }]
         // children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]

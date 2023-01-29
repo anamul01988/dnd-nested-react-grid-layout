@@ -10,12 +10,14 @@ import {
   handleMoveToDifferentParent,
   handleMoveSidebarComponentIntoParent,
   handleMoveSidebarComponentIntoParent1,
+  handleMoveSidebarComponentIntoParent2,
   handleRemoveItemFromLayout,
 } from "./helpers";
 
 import { SIDEBAR_ITEMS, SIDEBAR_ITEM, COMPONENT, COLUMN } from "./constants";
 import shortid from "shortid";
 import NewRow from "./NewRow";
+import NewColumn from "./NewColumn";
 
 const Container = () => {
   const initialLayout = initialData.layout;
@@ -43,9 +45,9 @@ const Container = () => {
       // if (item.component.type === COLUMN) {
       //   newItem.children = item.children;
       // }
-
+// =============== 3 ta hoilo row er moto input, row, column, er jonno start ========
       // sidebar into
-      if (item.type === SIDEBAR_ITEM && item.component.content !== "New Row") {
+      if (item.type === SIDEBAR_ITEM && item.component.content !== "New Row" && item.component.content !== "New_column1") {
         // 1. Move sidebar item into page
         const newComponent = {
           id: shortid.generate(),
@@ -69,7 +71,7 @@ const Container = () => {
         );
         return;
       }
-      // sidebar into for row and column
+      // sidebar into for row 
       if (item.type === SIDEBAR_ITEM && item.component.content === "New Row") {
         // 1. Move sidebar item into page
         const newComponent = {
@@ -94,7 +96,32 @@ const Container = () => {
         );
         return;
       }
-
+      // sidebar into for row 
+      if (item.type === SIDEBAR_ITEM && item.component.content === "New_column1") {
+        // 1. Move sidebar item into page
+        const newComponent = {
+          id: shortid.generate(),
+          ...item.component,
+        };
+        const newItem = {
+          id: newComponent.id,
+          // type: COMPONENT,
+          type: item.component.content,
+        };
+        setComponents({
+          ...components,
+          [newComponent.id]: newComponent,
+        });
+        setLayout(
+          handleMoveSidebarComponentIntoParent2(
+            layout,
+            splitDropZonePath,
+            newItem
+          )
+        );
+        return;
+      }
+// =============== 3 ta hoilo row er moto input, row, column, er jonno end ========
       // move down here since sidebar items dont have path
       const splitItemPath = item.path.split("-");
       const pathToItem = splitItemPath.slice(0, -1).join("-");
@@ -161,6 +188,20 @@ const Container = () => {
             components={components}
             path={currentPath}
           ></NewRow>
+        </>
+      );
+    }
+    if (row.type === "new_column") {
+      console.log("paici new column");
+      return (
+        <>
+          <NewColumn
+            key={row.id}
+            data={row}
+            handleDrop={handleDrop}
+            components={components}
+            path={currentPath}
+          ></NewColumn>
         </>
       );
     }

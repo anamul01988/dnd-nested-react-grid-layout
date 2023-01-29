@@ -42,7 +42,7 @@ const NewRow = ({ data, components, handleDrop, path }) => {
       {
         data.children.length === 0 && <div><h3>Empty Row</h3></div>
       }
-      {/* <h3 style={{color:"#000"}}>dddd</h3> */}
+      
       {/* <div className="columns">
         {data?.children?.map((column, index) => {
           const currentPath = `${path}-${index}`;
