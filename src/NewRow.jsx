@@ -6,8 +6,8 @@ import Column from "./Column";
 
 const style = {};
 const NewRow = ({ data, components, handleDrop, path }) => {
+  console.log(" In new Row ", data);
   const ref = useRef(null);
-
   const [{ isDragging }, drag] = useDrag({
     item: {
       type: ROW,
@@ -24,26 +24,27 @@ const NewRow = ({ data, components, handleDrop, path }) => {
   drag(ref);
 
   const renderColumn = (column, currentPath) => {
+    // console.log("column",column);
     return (
-        <div >
-            <h3>New Row</h3>
-  {/* <Column
+      <Column
         key={column.id}
         data={column}
         components={components}
         handleDrop={handleDrop}
         path={currentPath}
-      /> */}
-        </div>
-    
+      />
     );
   };
 
   return (
     <div ref={ref} style={{ ...style, opacity }} className="base draggable row">
       {data.id}
-      <div className="columns">
-        {data.children.map((column, index) => {
+      {
+        data.children.length === 0 && <div><h3>Empty Row</h3></div>
+      }
+      {/* <h3 style={{color:"#000"}}>dddd</h3> */}
+      {/* <div className="columns">
+        {data?.children?.map((column, index) => {
           const currentPath = `${path}-${index}`;
 
           return (
@@ -62,14 +63,14 @@ const NewRow = ({ data, components, handleDrop, path }) => {
         })}
         <DropZone
           data={{
-            path: `${path}-${data.children.length}`,
-            childrenCount: data.children.length,
+            path: `${path}-${data?.children?.length}`,
+            childrenCount: data?.children?.length,
           }}
           onDrop={handleDrop}
           className="horizontalDrag"
           isLast
         />
-      </div>
+      </div> */}
     </div>
   );
 };

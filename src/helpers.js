@@ -196,7 +196,7 @@ export const handleMoveSidebarComponentIntoParent = (
 ) => {
   let newLayoutStructure;
   console.log("layout in helper",layout);
-  console.log("splitDropZonePath in helper",splitDropZonePath);
+  // console.log("splitDropZonePath in helper",splitDropZonePath);
   console.log("item in helper",item);
   switch (splitDropZonePath.length) {
     case 1: {
@@ -204,6 +204,43 @@ export const handleMoveSidebarComponentIntoParent = (
         type: ROW,
         // type: NEW_ROW,
         id: shortid.generate(),
+        children: [{ id: shortid.generate(), children: [item] }]
+        // children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]
+        // children: []
+      };
+      break;
+    }
+    case 2: {
+      newLayoutStructure = {
+        type: COLUMN,
+        id: shortid.generate(),
+        children: [item]
+      };
+      break;
+    }
+    default: {
+      newLayoutStructure = item;
+    }
+  }
+
+  return addChildToChildren(layout, splitDropZonePath, newLayoutStructure);
+};
+export const handleMoveSidebarComponentIntoParent1 = (
+  layout,
+  splitDropZonePath,
+  item
+) => {
+  let newLayoutStructure;
+  console.log("layout in helper1",layout);
+  // console.log("splitDropZonePath in helper",splitDropZonePath);
+  console.log("item in helper1",item);
+  switch (splitDropZonePath.length) {
+    case 1: {
+      newLayoutStructure = {
+        // type: ROW,
+        type: NEW_ROW,
+        id: shortid.generate(),
+        // children: [{ id: shortid.generate(), children: [item] }]
         // children: [{ type: COLUMN, id: shortid.generate(), children: [item] }]
         children: []
       };

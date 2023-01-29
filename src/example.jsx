@@ -9,6 +9,7 @@ import {
   handleMoveWithinParent,
   handleMoveToDifferentParent,
   handleMoveSidebarComponentIntoParent,
+  handleMoveSidebarComponentIntoParent1,
   handleRemoveItemFromLayout,
 } from "./helpers";
 
@@ -32,19 +33,44 @@ const Container = () => {
 
   const handleDrop = useCallback(
     (dropZone, item) => {
-      console.log('dropZone', dropZone)
-      console.log('item', item)
+      // console.log('dropZone', dropZone)
+      console.log("item", item);
 
       const splitDropZonePath = dropZone.path.split("-");
       const pathToDropZone = splitDropZonePath.slice(0, -1).join("-");
 
-      const newItem = { id: item.id, type: item.type };
-      if (item.type === COLUMN) {
-        newItem.children = item.children;
-      }
+      // const newItem = { id: item.id, type: item.type };
+      // if (item.component.type === COLUMN) {
+      //   newItem.children = item.children;
+      // }
 
       // sidebar into
-      if (item.type === SIDEBAR_ITEM) {
+      if (item.type === SIDEBAR_ITEM && item.component.content !== "New Row") {
+        // 1. Move sidebar item into page
+        const newComponent = {
+          id: shortid.generate(),
+          ...item.component,
+        };
+        const newItem = {
+          id: newComponent.id,
+          type: COMPONENT,
+          // type: item.component.content,
+        };
+        setComponents({
+          ...components,
+          [newComponent.id]: newComponent,
+        });
+        setLayout(
+          handleMoveSidebarComponentIntoParent(
+            layout,
+            splitDropZonePath,
+            newItem
+          )
+        );
+        return;
+      }
+      // sidebar into for row and column
+      if (item.type === SIDEBAR_ITEM && item.component.content === "New Row") {
         // 1. Move sidebar item into page
         const newComponent = {
           id: shortid.generate(),
@@ -60,7 +86,7 @@ const Container = () => {
           [newComponent.id]: newComponent,
         });
         setLayout(
-          handleMoveSidebarComponentIntoParent(
+          handleMoveSidebarComponentIntoParent1(
             layout,
             splitDropZonePath,
             newItem
@@ -111,30 +137,38 @@ const Container = () => {
 
   const renderRow = (row, currentPath) => {
     console.log("row", row);
-    return (
-      <>
-        {/* <NewRow 
-       key={row.id}
-        data={row}
-        handleDrop={handleDrop}
-        components={components}
-        path={currentPath}>
-
-      </NewRow> */}
-        <Row
-          key={row.id}
-          data={row}
-          handleDrop={handleDrop}
-          components={components}
-          path={currentPath}
-        />
-      </>
-    );
+    if (row.type === "row") {
+      return (
+        <>
+          <Row
+            key={row.id}
+            data={row}
+            handleDrop={handleDrop}
+            components={components}
+            path={currentPath}
+          />
+        </>
+      );
+    }
+    if (row.type === "new_row") {
+      console.log("paici new Row");
+      return (
+        <>
+          <NewRow
+            key={row.id}
+            data={row}
+            handleDrop={handleDrop}
+            components={components}
+            path={currentPath}
+          ></NewRow>
+        </>
+      );
+    }
   };
 
   // dont use index for key when mapping over items
   // causes this issue - https://github.com/react-dnd/react-dnd/issues/342
-  console.log("main Layout data",layout);
+  // console.log("main Layout data",layout);
   return (
     <div className="body">
       <div className="sideBar">

@@ -12,7 +12,7 @@ const style = {
 const Component = ({ data, components, path }) => {
   const [modal, setModal] = useState(false);
   const toggleModal = (e) => {
-    console.log("clicked ", modal);
+    // console.log("clicked ", modal);
     setModal(!modal);
   };
   const ref = useRef(null);
@@ -28,11 +28,11 @@ const Component = ({ data, components, path }) => {
   drag(ref);
 
   const component = components[data.id];
-  console.log("component", component);
+  // console.log("component", component);
   return (
     <div
       ref={ref}
-     
+      onClick={toggleModal}
       style={{
         ...style,
         opacity,
@@ -40,7 +40,7 @@ const Component = ({ data, components, path }) => {
       className="component draggable"
     >
       <div>{data.id}</div>
-      <button  onClick={toggleModal}>Click me</button>
+      {/* <button  >Click me</button> */}
       <div>{component.content}</div>
       {modal && <Modal modal={modal} setModal={setModal} id={data.id}></Modal>}
     </div>
