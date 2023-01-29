@@ -77,6 +77,7 @@ body {
   display: flex;
   padding: 20px 0;
   resize: vertical;
+  cursor: ew-resize;
 }
 
 .columnContainer {

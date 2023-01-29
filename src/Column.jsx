@@ -5,6 +5,13 @@ import DropZone from "./DropZone";
 import Component from "./Component";
 
 const style = {};
+const getStyle = (isDragging) => (
+  {
+    opacity : isDragging ? 0 : 1,
+    background: isDragging?'blue':'white',
+    flex: isDragging? 2: 1,
+  }
+)
 const Column = ({ data, components, handleDrop, path }) => {
   const ref = useRef(null);
   // console.log("data",data);
@@ -21,6 +28,7 @@ const Column = ({ data, components, handleDrop, path }) => {
   });
 
   const opacity = isDragging ? 0 : 1;
+  // const backg = isDragging ? "#000" : "yellow";
   drag(ref);
 
   const renderComponent = (component, currentPath) => {
@@ -37,7 +45,8 @@ const Column = ({ data, components, handleDrop, path }) => {
   return (
     <div
       ref={ref}
-      style={{ ...style, opacity }}
+      // style={{ ...style, opacity }}
+      style={getStyle(isDragging)}
       className="base draggable column"
     >
       {data.id}
@@ -69,3 +78,4 @@ const Column = ({ data, components, handleDrop, path }) => {
   );
 };
 export default Column;
+

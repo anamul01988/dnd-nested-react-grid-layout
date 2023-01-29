@@ -195,6 +195,8 @@ export const handleMoveSidebarComponentIntoParent = (
   item
 ) => {
   let newLayoutStructure;
+  console.log("layout in helper",layout);
+  console.log("splitDropZonePath in helper",splitDropZonePath);
   console.log("item in helper",item);
   switch (splitDropZonePath.length) {
     case 1: {

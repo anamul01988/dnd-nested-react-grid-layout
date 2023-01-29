@@ -52,7 +52,8 @@ const Container = () => {
         };
         const newItem = {
           id: newComponent.id,
-          type: COMPONENT,
+          // type: COMPONENT,
+          type: item.component.content,
         };
         setComponents({
           ...components,
