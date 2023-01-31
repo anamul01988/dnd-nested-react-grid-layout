@@ -1,11 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { ROW } from "./constants";
 import DropZone from "./DropZone";
 import Column from "./Column";
+import Modal from "./Modal";
 
 const style = {};
 const NewRow = ({ data, components, handleDrop, path }) => {
+  const [modal, setModal] = useState(false);
+  const toggleModal = (e) => {
+    // console.log("clicked ", modal);
+    setModal(!modal);
+  };
   console.log(" In new Row ", data);
   const ref = useRef(null);
   const [{ isDragging }, drag] = useDrag({
@@ -37,12 +43,19 @@ const NewRow = ({ data, components, handleDrop, path }) => {
   };
 
   return (
-    <div ref={ref} style={{ ...style, opacity }} className="base draggable row">
+    <div ref={ref} onClick={toggleModal} style={{ ...style, opacity }} className="base draggable row">
       {data.id}
       {
         data.children.length === 0 && <div><h3>Empty Row</h3></div>
       }
-      
+         <DropZone
+            data={{
+              path: path,
+              childrenCount: data.children.length,
+            }}
+            onDrop={handleDrop}
+            isLast
+          />
       {/* <div className="columns">
         {data?.children?.map((column, index) => {
           const currentPath = `${path}-${index}`;
@@ -71,6 +84,7 @@ const NewRow = ({ data, components, handleDrop, path }) => {
           isLast
         />
       </div> */}
+         {modal && <Modal modal={modal} setModal={setModal} id={data.id}></Modal>}
     </div>
   );
 };

@@ -57,19 +57,19 @@ export const SIDEBAR_ITEMS = [
       content: "New Row"
     }
   },
+  // {
+  //   id: shortid.generate(),
+  //   type: SIDEBAR_ITEM,
+  //   component: {
+  //     type: "Column",
+  //     content: "New column"
+  //   }
+  // },
   {
     id: shortid.generate(),
     type: SIDEBAR_ITEM,
     component: {
       type: "Column",
-      content: "New column"
-    }
-  },
-  {
-    id: shortid.generate(),
-    type: SIDEBAR_ITEM,
-    component: {
-      type: "Column1",
       content: "New_column1"
     }
   },

@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDrag } from "react-dnd";
 import { COLUMN } from "./constants";
 import DropZone from "./DropZone";
 import Component from "./Component";
+import Modal from "./Modal";
 
 const style = {};
 const getStyle = (isDragging) => (
@@ -14,6 +15,11 @@ const getStyle = (isDragging) => (
 )
 const NewColumn = ({ data, components, handleDrop, path }) => {
   const ref = useRef(null);
+  const [modal, setModal] = useState(false);
+  const toggleModal = (e) => {
+    // console.log("clicked ", modal);
+    setModal(!modal);
+  };
   // console.log("data",data);
   const [{ isDragging }, drag] = useDrag({
     item: {
@@ -45,12 +51,13 @@ const NewColumn = ({ data, components, handleDrop, path }) => {
   return (
     <div
       ref={ref}
+      onClick={toggleModal}
       // style={{ ...style, opacity }}
       style={getStyle(isDragging)}
       className="base draggable column"
     >
       {data.id}
-      <h3>New Column </h3>
+      <h3>Empty Column </h3>
       {/* {data.children.map((component, index) => {
         const currentPath = `${path}-${index}`;
 
@@ -75,6 +82,7 @@ const NewColumn = ({ data, components, handleDrop, path }) => {
         onDrop={handleDrop}
         isLast
       /> */}
+         {modal && <Modal modal={modal} setModal={setModal} id={data.id}></Modal>}
     </div>
   );
 };

@@ -195,9 +195,9 @@ export const handleMoveSidebarComponentIntoParent = (
   item
 ) => {
   let newLayoutStructure;
-  console.log("layout in helper",layout);
+  // console.log("layout in helper",layout);
   // console.log("splitDropZonePath in helper",splitDropZonePath);
-  console.log("item in helper",item);
+  // console.log("item in helper",item);
   switch (splitDropZonePath.length) {
     case 1: {
       newLayoutStructure = {
@@ -231,9 +231,9 @@ export const handleMoveSidebarComponentIntoParent1 = (
   item
 ) => {
   let newLayoutStructure;
-  console.log("layout in helper1",layout);
+  // console.log("layout in helper1",layout);
   // console.log("splitDropZonePath in helper",splitDropZonePath);
-  console.log("item in helper1",item);
+  // console.log("item in helper1",item);
   switch (splitDropZonePath.length) {
     case 1: {
       newLayoutStructure = {
@@ -267,9 +267,9 @@ export const handleMoveSidebarComponentIntoParent2 = (
   item
 ) => {
   let newLayoutStructure;
-  console.log("for new column layout in helpers",layout);
+  // console.log("for new column layout in helpers",layout);
   // console.log("splitDropZonePath in helper",splitDropZonePath);
-  console.log("for new column item in helpers",item);
+  // console.log("for new column item in helpers",item);
   switch (splitDropZonePath.length) {
     case 1: {
       newLayoutStructure = {
