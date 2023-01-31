@@ -20,6 +20,7 @@
     "react-dom": "16.8.4",
     "react-drag-resize": "^0.1.4",
     "react-frame-component": "^4.1.0",
+    "react-resizable": "^3.0.4",
     "react-scripts": "^5.0.1",
     "shortid": "2.2.15"
   },

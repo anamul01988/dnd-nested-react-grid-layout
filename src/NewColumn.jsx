@@ -5,6 +5,7 @@ import DropZone from "./DropZone";
 import Component from "./Component";
 import Modal from "./Modal";
 
+// import { Resizable, ResizableBox } from 'react-resizable';
 const style = {};
 const getStyle = (isDragging) => (
   {
@@ -84,6 +85,7 @@ const NewColumn = ({ data, components, handleDrop, path }) => {
       /> */}
          {modal && <Modal modal={modal} setModal={setModal} id={data.id}></Modal>}
     </div>
+
   );
 };
 export default NewColumn;
